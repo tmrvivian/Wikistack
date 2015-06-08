@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Add A Page</h1>
+    <hr>
+    <div class ='container'>
+    	<form action='/add/submit' method = 'post'>
+	    	<div class="form-group">
+	    	<label>PAGE TITLE</label>
+	    	<input name='title' type="text" class="form-control" placeholder="Title">
+	    	</div>
+	    	<div class="form-group">
+	    	<label>TAG</label>
+	    	<input name='tag' type="text" class="form-control" placeholder ='Tags'>
+	    	</div>
+	    	 <div class="form-group">
+	    	<label>PAGE CONTENT</label>
+	    	<textarea name='content' class="form-control" rows="12" placeholder="Content"></textarea>
+	    	</div>
+	    	<button type="submit" class="btn btn-info">Submit</button>
+	    </form>
+    </div>
+{% endblock %}

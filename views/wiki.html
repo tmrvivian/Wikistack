@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>{{doc.title}}</h1>
+    <hr>
+    {% for t in doc.tag %}
+    <a href='/tag/{{t}}'>{{t}}</a>
+    {% endfor %}
+    <p1>{{doc.body|marked}}</p1>
+
+    <a href="/edit/{{doc._id.toString()}}" class="btn btn-warning" role="button">Edit</a>
+    <a href="/" class="btn btn-danger" role="button">Delete</a>
+{% endblock %}
