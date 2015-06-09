@@ -4,7 +4,7 @@
     <h1>{{doc.title}}</h1>
     <hr>
     {% for t in doc.tag %}
-    <a href='/tag/{{t}}'>{{t}}</a>
+    <a href='/tag/{{t}}'>#{{t}}</a>
     {% endfor %}
     <p1>{{doc.body|marked}}</p1>
 

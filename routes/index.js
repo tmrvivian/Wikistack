@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Page = require('../models/').Page;
+/*var mongoose = require('mongoose')
+var page = mongoose.model('Page')*/
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   Page.find({},function(err, data){
@@ -31,7 +34,11 @@ var generateUrlName = function(name) {
 	  }
   };
 
-router.post('/add/submit', function(req, res) {
+router.get('/about', function(req, res, next) {
+  res.render('about_us',{title:'WIKISTACK'});
+});
+
+router.post('/add/submit', function(req, res) {//change that to router.post('/',function(){})
   var models = require('../models/');
   // STUDENT ASSIGNMENT:
   // add definitions of the `title`, `body` and `url_name` variables here
@@ -44,13 +51,16 @@ router.post('/add/submit', function(req, res) {
   res.redirect('/');
 });
 
-router.post('/:id/submit', function(req, res){
+router.post('/:id/submit', function(req, res, next){
 	var title = req.body.title;
   	var body = req.body.content;
   	var url_name=generateUrlName(req.body.title);
   	var tag = req.body.tag.split(' ');
+  	// models.Page.create(req.body, function(err, page){}); don't need to use Page.save() with create. Need to use Page.save() with new Page.
+  	//create with skip any pre-saved hooks
 	Page.update({_id:req.params.id},{ $set:{'title': title, 'body': body, 'url_name': url_name, 'tag':tag}}, function(err, data){
-		res.redirect('/');
+		if (err) return next(err);//if err, stop function, next skips all middleware and go find the middleware with four parameter, which is an error handling middleware
+		res.redirect('/');//browser command, different from relative path. relative to root.
 	});
 });
 

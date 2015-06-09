@@ -21,13 +21,13 @@ app.set('view engine', 'html');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json());//http body is like 'title:my%20page', body parser takes the string and turn it in to a javascript object.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', routes);//go in '/' and find the exact match, if no exact match, come back and execute the next one.
+app.use('/users', users);//app.use(path, function) - all path begins with /users, when go into routes, path needs to match exactly. 
 app.use('/add', addRoutes);
 
 
